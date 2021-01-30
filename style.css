@@ -1,0 +1,169 @@
+@font-face{
+	font-family: Roboto;
+	src: url(font/Roboto-Light.ttf);
+}
+
+html{
+	font-size: 20px;
+	font-family: Roboto;
+	font-weight: 200;
+	background: #e8d6ff;
+
+	-webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
+}
+
+td{
+	width: 70px;
+	height: 70px;
+	background: white;
+	border-radius: 5%;
+	text-align: center;
+}
+
+table{
+	border: 1px solid black;
+	background: grey;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+	border: 2px solid black;
+	border-radius: 5%;
+	padding: 5px 10px;
+}
+
+.cell0{
+	background: white;
+}
+
+.cell2{
+	background: #CCFBFC;
+}
+
+.cell4{
+	background: #06E2FF;
+}
+
+.cell8{
+	background: #D5D1E8;
+}
+
+.cell16{
+	background: #FFC2D6;
+}
+
+.cell32{
+	background: #FF7373;
+}
+
+.cell64{
+	background: #FF3333;
+}
+
+.cell128{
+	background: #FFFB73;
+}
+
+.cell256{
+	background: #FFFB73;
+}
+
+.cell512{
+	background: #FFFB73;
+}
+
+.cell1024{
+	background: yellow;
+}
+
+.cellFull{
+	background: black;
+	color: white;
+}
+
+.nav_button{
+	margin-top: 20px;
+}
+
+#score{
+	display: flex;
+	flex: center;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+#nav_button{
+	text-align: center;
+}
+
+#field{
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.nav_button{
+	text-align: center;
+	margin-top: 20px;
+}
+
+.start_button{
+	font-size: 18px;
+}
+
+.start_button:hover{
+	font-size: 20px;
+}
+
+#status{
+	margin-top: 20px;
+	text-align: center;
+}
+
+#score_num{
+	padding-left: 3px;
+	padding-right: 20px;
+}
+
+#record{
+	padding-right: 3px;
+}
+
+@media (max-device-width : 425px) {
+
+	html{
+		font-size: 50px;
+	}
+
+	td{
+		width: 180px;
+		height: 180px;
+	}
+
+	#score{
+		margin-top: 25%;
+	}
+
+	#field{
+		margin-top: 5%;
+		margin-bottom: 5%;
+	}
+
+	#status{
+		margin-top: 5%;
+	}
+
+	.start_button{
+		font-size: 45px;
+	}
+
+	.start_button:hover{
+		font-size: 50px;
+	}
+}

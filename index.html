@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2048</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div>
+		<div id="score">
+			<div>Счёт:</div>
+			<div id="score_num">0</div>
+			<div>Рекорд:</div>
+			<div id="record">0</div>
+
+		</div>
+	</div>
+
+	<div>
+		<div id="status" hidden="true">Вы проиграли</div>
+	</div>
+
+	<div>
+		<table id="field">
+		<tr>
+			<td id="cell_00" class=""></td>
+			<td id="cell_01" class=""></td>
+			<td id="cell_02" class=""></td>
+			<td id="cell_03" class=""></td>
+		</tr>
+		<tr>
+			<td id="cell_10" class=""></td>
+			<td id="cell_11" class=""></td>
+			<td id="cell_12" class=""></td>
+			<td id="cell_13" class=""></td>
+		</tr>
+		<tr>
+			<td id="cell_20" class=""></td>
+			<td id="cell_21" class=""></td>
+			<td id="cell_22" class=""></td>
+			<td id="cell_23" class=""></td>
+		</tr>
+		<tr>
+			<td id="cell_30" class=""></td>
+			<td id="cell_31" class=""></td>
+			<td id="cell_32" class=""></td>
+			<td id="cell_33" class=""></td>
+		</tr>
+	</table>
+	</div>
+
+	<div class="nav_button">
+		<a class="start_button" href="#" onclick="game.newGame()">Новая игра</a>
+	</div>
+
+	<script type="text/javascript" src="code.js"></script>
+</body>
+</html>
