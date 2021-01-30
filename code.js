@@ -358,17 +358,16 @@ const pointerChecker = {
 	y: 0,
 
 	pointDown(e){
-		this.x = e.clientX;
-		this.y = e.clientY;
-		alert(e.clientX);
-		alert(e.pageX);
+		this.x = e.touches[0].clientX;
+		this.y = e.touches[0].clientY;
 	},
 
 	pointUp(e){
-		let resX = e.clientX;
-		let resY = e.clientY;
+		log(e);
+		let resX = e.changedTouches[0].clientX;
+		let resY = e.changedTouches[0].clientY;
 
-		if((Math.abs(resX - this.x)) || (Math.abs(resY - this.y))){
+		if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
 			if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
 				if(this.x > resX){
 					game.left();
