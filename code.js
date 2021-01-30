@@ -353,7 +353,6 @@ function log(el){
 
 document.addEventListener('touchstart', (event) => pointerChecker.pointDown(event));
 document.addEventListener('touchend', (event) => pointerChecker.pointUp(event));
-document.addEventListener("touchmove" , defaultPrevent);
 
 const pointerChecker = {
 	x: 0,
