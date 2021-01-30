@@ -1,3 +1,6 @@
+var xPos=null;var yPos=null;window.addEventListener("touchmove",function(event){var touch=event.originalEvent.touches[0];oldX=xPos;oldY=yPos;xPos=touch.pageX;yPos=touch.pageY;if(oldX==null && oldY==null){return false;}else{if(Math.abs(oldX-xPos)>Math.abs(oldY-yPos)){event.preventDefault();return false;}}});
+
+
 const game = {
 	field: [
 		[0,0,0,0],
