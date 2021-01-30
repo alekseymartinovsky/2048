@@ -360,6 +360,8 @@ const pointerChecker = {
 	pointDown(e){
 		this.x = e.clientX;
 		this.y = e.clientY;
+		log(e.clientX);
+		log(e.pageX);
 	},
 
 	pointUp(e){
