@@ -360,13 +360,11 @@ const pointerChecker = {
 	y: 0,
 
 	pointDown(e){
-		e.defaultPrevent();
 		this.x = e.touches[0].clientX;
 		this.y = e.touches[0].clientY;
 	},
 
 	pointUp(e){
-		e.defaultPrevent();
 		let resX = e.changedTouches[0].clientX;
 		let resY = e.changedTouches[0].clientY;
 
