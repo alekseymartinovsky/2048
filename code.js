@@ -358,7 +358,6 @@ const pointerChecker = {
 	y: 0,
 
 	pointDown(e){
-		alert('aaaa');
 		this.x = e.clientX;
 		this.y = e.clientY;
 	},
@@ -367,7 +366,7 @@ const pointerChecker = {
 		let resX = e.clientX;
 		let resY = e.clientY;
 
-		if((Math.abs(resX - this.x) > 70) || (Math.abs(resY - this.y) > 70)){
+		if((Math.abs(resX - this.x)) || (Math.abs(resY - this.y))){
 			if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
 				if(this.x > resX){
 					game.left();
