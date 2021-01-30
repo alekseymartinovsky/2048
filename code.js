@@ -1,5 +1,3 @@
-var xPos=null;var yPos=null;window.addEventListener("touchmove",function(event){var touch=event.originalEvent.touches[0];oldX=xPos;oldY=yPos;xPos=touch.pageX;yPos=touch.pageY;if(oldX==null && oldY==null){return false;}else{if(Math.abs(oldX-xPos)>Math.abs(oldY-yPos)){event.preventDefault();return false;}}});
-
 
 const game = {
 	field: [
@@ -355,18 +353,20 @@ function log(el){
 
 document.addEventListener('touchstart', (event) => pointerChecker.pointDown(event));
 document.addEventListener('touchend', (event) => pointerChecker.pointUp(event));
+document.addEventListener("touchmove" , defaultPrevent);
 
 const pointerChecker = {
 	x: 0,
 	y: 0,
 
 	pointDown(e){
+		//e.defaultPrevent();
 		this.x = e.touches[0].clientX;
 		this.y = e.touches[0].clientY;
 	},
 
 	pointUp(e){
-		log(e);
+		//e.defaultPrevent();
 		let resX = e.changedTouches[0].clientX;
 		let resY = e.changedTouches[0].clientY;
 
