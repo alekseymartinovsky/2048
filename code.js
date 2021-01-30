@@ -350,8 +350,8 @@ function log(el){
 	console.log(el);
 }
 
-document.addEventListener('pointerdown', (event) => pointerChecker.pointDown(event));
-document.addEventListener('pointerup', (event) => pointerChecker.pointUp(event));
+document.addEventListener('touchstart', (event) => pointerChecker.pointDown(event));
+document.addEventListener('touchend', (event) => pointerChecker.pointUp(event));
 
 const pointerChecker = {
 	x: 0,
