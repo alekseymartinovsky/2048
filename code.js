@@ -358,6 +358,7 @@ const pointerChecker = {
 	y: 0,
 
 	pointDown(e){
+		alert('aaaa');
 		this.x = e.clientX;
 		this.y = e.clientY;
 	},
