@@ -1,6 +1,10 @@
 const game = {
 	field: [],
 
+	status: false,
+
+	continueGame: false,
+
 	score: 0,
 
 	preField: [],
@@ -239,6 +243,7 @@ const game = {
 
 		if(lose == true){
 			document.getElementById("status").hidden = false;
+			this.status = false;
 		}
 	},
 
@@ -300,33 +305,42 @@ const game = {
 	},
 
 	key(event){
-		if(event.key == 'ArrowUp'){
-			game.up();
-		}
-		if(event.key == 'ArrowDown'){
-			game.down();
-		}
-		if(event.key == 'ArrowLeft'){
-			game.left();
-		}
-		if(event.key == 'ArrowRight'){
-			game.right();
+		if(game.continueGame == true){
+			if(event.key == 'ArrowUp'){
+				game.up();
+			}
+			if(event.key == 'ArrowDown'){
+				game.down();
+			}
+			if(event.key == 'ArrowLeft'){
+				game.left();
+			}
+			if(event.key == 'ArrowRight'){
+				game.right();
+			}
 		}
 	},
 
 	newGame(){
-		this.field.splice(0, this.field.length);
+		if(game.status == false){
+			this.status = true;
+			this.continueGame = true;
+			this.field.splice(0, this.field.length);
 
-		for(let i = 0; i < setting.size; i++){
-			game.field.push([]);
-			game.preField.push([]);
-			for(let j = 0; j < setting.size; j++){
-				game.field[i].push(0);
-				game.preField[i].push(0);
+			for(let i = 0; i < setting.size; i++){
+				game.field.push([]);
+				game.preField.push([]);
+				for(let j = 0; j < setting.size; j++){
+					game.field[i].push(0);
+					game.preField[i].push(0);
+				}
 			}
+			document.getElementById("status").hidden = true;
+			game.start();
+		}else{
+			document.getElementById('newGame').hidden = false;
+			this.continueGame = false;
 		}
-		document.getElementById("status").hidden = true;
-		game.start();
 	},
 
 	back(){
@@ -349,22 +363,59 @@ const game = {
 const setting = {
 	size: 4,
 
-	minus(){
-		if(this.size > 3){
-			this.size -=1;
+	nextComand: '',
+
+	changeStatus(status){
+		game.status = status;
+		document.getElementById('newGame').hidden = true;
+		if(status == false){
+			if(this.nextComand == 'minus'){
+				this.minus();
+			}else if(this.nextComand == 'plus'){
+				this.plus();
+			}else{
+				game.newGame();
+			}
 		}else{
-			this.size = 8;
+			game.continueGame = true;
 		}
-		this.render();
+	},
+
+	newField(){
+		if(game.status == false){
+			return true;
+		}else{
+			document.getElementById('newGame').hidden = false;
+			return false;
+		}
+	},
+
+	minus(){
+		if(this.newField() == true){
+			if(this.size > 3){
+				this.size -=1;
+			}else{
+				this.size = 8;
+			}
+			this.render();
+			this.nextComand = '';
+		}else{
+			this.nextComand = 'minus';
+		}
 	},
 
 	plus(){
-		if(this.size < 8){
-			this.size += 1;
+		if(this.newField() == true){
+			if(this.size < 8){
+				this.size += 1;
+			}else{
+				this.size = 3;
+			}
+			this.render();
+			this.nextComand = '';
 		}else{
-			this.size = 3;
+			this.nextComand = 'plus';
 		}
-		this.render();
 	},
 
 	render(){
@@ -417,21 +468,24 @@ const touchChecker = {
 		let resX = e.changedTouches[0].clientX;
 		let resY = e.changedTouches[0].clientY;
 
-		if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
-			if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
-				if(this.x > resX){
-					game.left();
+		if(game.continueGame == true){
+			if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
+				if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
+					if(this.x > resX){
+						game.left();
+					}else{
+						game.right();
+					}
 				}else{
-					game.right();
-				}
-			}else{
-				if(this.y > resY){
-					game.up();
-				}else{
-					game.down();
+					if(this.y > resY){
+						game.up();
+					}else{
+						game.down();
+					}
 				}
 			}
 		}
+		
 	}
 }
 
@@ -449,18 +503,20 @@ const pointChecker = {
 		let resX = e.clientX;
 		let resY = e.clientY;
 
-		if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
-			if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
-				if(this.x > resX){
-					game.left();
+		if(game.continueGame == true){
+			if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
+				if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
+					if(this.x > resX){
+						game.left();
+					}else{
+						game.right();
+					}
 				}else{
-					game.right();
-				}
-			}else{
-				if(this.y > resY){
-					game.up();
-				}else{
-					game.down();
+					if(this.y > resY){
+						game.up();
+					}else{
+						game.down();
+					}
 				}
 			}
 		}
