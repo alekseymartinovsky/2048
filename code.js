@@ -1,21 +1,21 @@
 const game = {
-	field: [
-		[0,0,0,0],
-		[0,0,0,0],
-		[0,0,0,0],
-		[0,0,0,0],
-	],
+	field: [],
+
+	status: false,
+
+	continueGame: false,
 
 	score: 0,
 
-	preField: [[],[],[],[]],
+	preField: [],
 
 	start(){
+		document.getElementById('win').hidden = true;
 		this.score = 0;
 		this.randomCeil();
 		this.randomCeil();
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				this.preField[i][j] = this.field[i][j];
 			}
 		}
@@ -23,24 +23,24 @@ const game = {
 	},
 
 	renderRecord(){
-		if(localStorage.getItem('record2048')){
-			document.getElementById('record').textContent = localStorage.getItem('record2048');
+		if(localStorage.getItem('record2048_' + setting.size)){
+			document.getElementById('record').textContent = localStorage.getItem('record2048_' + setting.size);
 		}else{
-			localStorage.setItem('record2048', 0);
+			localStorage.setItem('record2048_' + setting.size, 0);
 		}
 	},
 
 	save(){
-		if(localStorage.getItem('record2048') < game.score){
-			localStorage.setItem('record2048', game.score);
+		if(localStorage.getItem('record2048_' + setting.size) < game.score){
+			localStorage.setItem('record2048_' +setting.size, game.score);
 			document.getElementById("record").textContent = game.score;
 		}
 	},
 
 	randomCeil(){
 		let mas = [];
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				if(this.field[i][j] == 0){
 					mas.push(String(i) + String(j));
 				}
@@ -74,8 +74,8 @@ const game = {
 
 	up(){
 		let a = 0;
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				if(this.field[j][i] != 0){
 					let buf = this.field[j][i];
 					this.field[j][i] = 0;
@@ -86,12 +86,12 @@ const game = {
 			a = 0;
 		}
 
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 3; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size - 1; j++){
 				if(this.field[j][i] == this.field[j+1][i]){
 					this.field[j][i] *= 2;
-					
-					for(let y = j+1; y < 3; y++){
+
+					for(let y = j+1; y < setting.size - 1; y++){
 						let buf = this.field[y+1][i];
 						this.field[y+1][i] = 0;
 						this.field[y][i] = buf;
@@ -104,9 +104,9 @@ const game = {
 	},
 
 	down(){
-		let a = 3;
-		for(let i = 0; i < 4; i++){
-			for(let j = 3; j >= 0; j--){
+		let a = setting.size - 1;
+		for(let i = 0; i < setting.size; i++){
+			for(let j = setting.size - 1; j >= 0; j--){
 				if(this.field[j][i] != 0){
 					let buf = this.field[j][i];
 					this.field[j][i] = 0;
@@ -114,10 +114,10 @@ const game = {
 					a--;
 				}
 			}
-			a = 3;
+			a = setting.size - 1;
 		}
-		for(let i = 0; i < 4; i++){
-			for(let j = 3; j > 0; j--){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = setting.size - 1; j > 0; j--){
 				if(this.field[j][i] == this.field[j-1][i]){
 					this.field[j][i] *= 2;
 
@@ -134,9 +134,9 @@ const game = {
 	},
 
 	right(){
-		let a = 3;
-		for(let i = 0; i < 4; i++){
-			for(let j = 3; j >= 0; j--){
+		let a = setting.size - 1;
+		for(let i = 0; i < setting.size; i++){
+			for(let j = setting.size - 1; j >= 0; j--){
 				if(this.field[i][j] != 0){
 					let buf = this.field[i][j];
 					this.field[i][j] = 0;
@@ -144,10 +144,10 @@ const game = {
 					a--;
 				}
 			}
-			a = 3;
+			a = setting.size - 1;
 		}
-		for(let i = 0; i < 4; i++){
-			for(let j = 3; j > 0; j--){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = setting.size - 1; j > 0; j--){
 				if(this.field[i][j] == this.field[i][j-1]){
 					this.field[i][j] *= 2;
 
@@ -165,8 +165,8 @@ const game = {
 
 	left(){
 		let a = 0;
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				if(this.field[i][j] != 0){
 					let buf = this.field[i][j];
 					this.field[i][j] = 0;
@@ -176,12 +176,12 @@ const game = {
 			}
 			a = 0;
 		}
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 3; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size - 1; j++){
 				if(this.field[i][j] == this.field[i][j+1]){
 					this.field[i][j] *= 2;
 
-					for(let y = j+1; y < 3; y++){
+					for(let y = j+1; y < setting.size - 1; y++){
 						let buf = this.field[i][y+1];
 						this.field[i][y+1] = 0;
 						this.field[i][y] = buf;
@@ -194,21 +194,24 @@ const game = {
 	},
 
 	reloadMas(){
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				this.preField[i][j] = this.field[i][j];
+				if(this.field[i][j] >= 2048){
+					document.getElementById('win').hidden = false;
+				}
 			} 
 		}
 	},
 
 	checkMove(){
 		let res = false;
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				if(this.field[i][j] != this.preField[i][j]){
 					res = true;
-					i = 4;
-					j = 4;
+					i = setting.size;
+					j = setting.size;
 				}
 			}
 		}
@@ -228,24 +231,25 @@ const game = {
 		let lose = true;
 		this.field.forEach( mas => mas.forEach((el) => {if(el == 0){ lose = false; }}));
 		
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 3; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size - 1; j++){
 				if((this.field[i][j] == this.field[i][j+1]) || (this.field[j][i] == this.field[j+1][i])){
 					lose = false;
-					i = 4;
-					j = 3;
+					i = setting.size;
+					j = setting.size - 1;
 				}
 			}
 		}
 
 		if(lose == true){
 			document.getElementById("status").hidden = false;
+			this.status = false;
 		}
 	},
 
 	render(){
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				let cell = this.findObj(i, j);
 				cell.classList.remove('cell0', 'cell2', 'cell4', 'cell8', 'cell16', 'cell2','cell32', 'cell64', 'cell128', 'cell256', 'cell512', 'cell1024', 'cellFull');
 				switch(this.field[i][j]){
@@ -301,33 +305,47 @@ const game = {
 	},
 
 	key(event){
-		if(event.key == 'ArrowUp'){
-			game.up();
-		}
-		if(event.key == 'ArrowDown'){
-			game.down();
-		}
-		if(event.key == 'ArrowLeft'){
-			game.left();
-		}
-		if(event.key == 'ArrowRight'){
-			game.right();
+		if(game.continueGame == true){
+			if(event.key == 'ArrowUp'){
+				game.up();
+			}
+			if(event.key == 'ArrowDown'){
+				game.down();
+			}
+			if(event.key == 'ArrowLeft'){
+				game.left();
+			}
+			if(event.key == 'ArrowRight'){
+				game.right();
+			}
 		}
 	},
 
 	newGame(){
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
-				game.field[i][j] = 0;
+		if(game.status == false){
+			this.status = true;
+			this.continueGame = true;
+			this.field.splice(0, this.field.length);
+
+			for(let i = 0; i < setting.size; i++){
+				game.field.push([]);
+				game.preField.push([]);
+				for(let j = 0; j < setting.size; j++){
+					game.field[i].push(0);
+					game.preField[i].push(0);
+				}
 			}
+			document.getElementById("status").hidden = true;
+			game.start();
+		}else{
+			document.getElementById('newGame').hidden = false;
+			this.continueGame = false;
 		}
-		document.getElementById("status").hidden = true;
-		game.start();
 	},
 
 	back(){
-		for(let i = 0; i < 4; i++){
-			for(let j = 0; j < 4; j++){
+		for(let i = 0; i < setting.size; i++){
+			for(let j = 0; j < setting.size; j++){
 				this.field[i][j] = this.preField[i][j];
 				this.render();
 			}
@@ -342,6 +360,87 @@ const game = {
   	},
 }
 
+const setting = {
+	size: 4,
+
+	nextComand: '',
+
+	changeStatus(status){
+		game.status = status;
+		document.getElementById('newGame').hidden = true;
+		if(status == false){
+			if(this.nextComand == 'minus'){
+				this.minus();
+			}else if(this.nextComand == 'plus'){
+				this.plus();
+			}else{
+				game.newGame();
+			}
+		}else{
+			game.continueGame = true;
+		}
+	},
+
+	newField(){
+		if(game.status == false){
+			return true;
+		}else{
+			document.getElementById('newGame').hidden = false;
+			return false;
+		}
+	},
+
+	minus(){
+		if(this.newField() == true){
+			if(this.size > 3){
+				this.size -=1;
+			}else{
+				this.size = 8;
+			}
+			this.render();
+			this.nextComand = '';
+		}else{
+			this.nextComand = 'minus';
+		}
+	},
+
+	plus(){
+		if(this.newField() == true){
+			if(this.size < 8){
+				this.size += 1;
+			}else{
+				this.size = 3;
+			}
+			this.render();
+			this.nextComand = '';
+		}else{
+			this.nextComand = 'plus';
+		}
+	},
+
+	render(){
+		document.getElementById('sizeField').textContent = this.size + '*' + this.size;
+
+		let table = document.getElementById('field');
+		while(table.rows.length > 0) {
+			table.deleteRow(0);
+		}
+
+		for(let i = 0; i < this.size; i++){
+			let tr = document.createElement("tr");
+			table.appendChild(tr);
+			for(let j = 0; j < this.size; j++){
+				let td = document.createElement("td");
+				td.id = 'cell_' + String(i) + String(j);
+				td.classList.add("size" + this.size);
+				table.rows[i].appendChild(td);
+			}
+		}
+
+		game.renderRecord();
+	}
+}
+
 document.onkeyup = game.key;
 
 game.renderRecord();
@@ -350,10 +449,48 @@ function log(el){
 	console.log(el);
 }
 
-document.addEventListener('pointerdown', (event) => pointerChecker.pointDown(event));
-document.addEventListener('pointerup', (event) => pointerChecker.pointUp(event));
+document.addEventListener('touchstart', (event) => touchChecker.touchDown(event));
+document.addEventListener('touchend', (event) => touchChecker.touchUp(event));
 
-const pointerChecker = {
+document.addEventListener('pointerdown', (event) => pointChecker.pointDown(event));
+document.addEventListener('pointerup', (event) => pointChecker.pointUp(event));
+
+const touchChecker = {
+	x: 0,
+	y: 0,
+
+	touchDown(e){
+		this.x = e.touches[0].clientX;
+		this.y = e.touches[0].clientY;
+	},
+
+	touchUp(e){
+		let resX = e.changedTouches[0].clientX;
+		let resY = e.changedTouches[0].clientY;
+
+		if(game.continueGame == true){
+			if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
+				if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
+					if(this.x > resX){
+						game.left();
+					}else{
+						game.right();
+					}
+				}else{
+					if(this.y > resY){
+						game.up();
+					}else{
+						game.down();
+					}
+				}
+			}
+		}
+		
+	}
+}
+
+
+const pointChecker = {
 	x: 0,
 	y: 0,
 
@@ -366,21 +503,22 @@ const pointerChecker = {
 		let resX = e.clientX;
 		let resY = e.clientY;
 
-		if((Math.abs(resX - this.x) > 70) || (Math.abs(resY - this.y) > 70)){
-			if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
-				if(this.x > resX){
-					game.left();
+		if(game.continueGame == true){
+			if((Math.abs(resX - this.x) > 50) || (Math.abs(resY - this.y) > 50)){
+				if(Math.abs(resX - this.x) > Math.abs(resY - this.y)){
+					if(this.x > resX){
+						game.left();
+					}else{
+						game.right();
+					}
 				}else{
-					game.right();
-				}
-			}else{
-				if(this.y > resY){
-					game.up();
-				}else{
-					game.down();
+					if(this.y > resY){
+						game.up();
+					}else{
+						game.down();
+					}
 				}
 			}
 		}
 	}
 }
-

@@ -1,6 +1,10 @@
 @font-face{
 	font-family: Roboto;
-	src: url(font/Roboto-Light.ttf);
+	src: url(font/Roboto-Medium.ttf);
+}
+
+html, body {
+    overscroll-behavior-x: none;
 }
 
 html{
@@ -8,27 +12,66 @@ html{
 	font-family: Roboto;
 	font-weight: 200;
 	background: #e8d6ff;
-
+	/*отключение выделения текста*/
 	-webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none;   /* Chrome/Safari/Opera */
-  -khtml-user-select: none;    /* Konqueror */
-  -moz-user-select: none;      /* Firefox */
-  -ms-user-select: none;       /* Internet Explorer/Edge */
-  user-select: none;           /* Non-prefixed version, currently
+  	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+  	-khtml-user-select: none;    /* Konqueror */
+  	-moz-user-select: none;      /* Firefox */
+  	-ms-user-select: none;       /* Internet Explorer/Edge */
+  	user-select: none;           /* Non-prefixed version, currently
                                   not supported by any browser */
 }
 
+body{
+	overflow: hidden;
+}
+
+
 td{
-	width: 70px;
-	height: 70px;
 	background: white;
 	border-radius: 5%;
 	text-align: center;
 }
 
+.size3{
+	width: 93.333px;
+	height: 93.333px;
+	font-size: 26px;
+}
+
+.size4{
+	width: 70px;
+	height: 70px;
+}
+
+.size5{
+	width: 56px;
+	height: 56px;
+	font-size: 16px;
+}
+
+.size6{
+	width: 46.666px;
+	height: 46.666px;
+	font-size: 13px;
+}
+
+.size7{
+	width: 40px;
+	height: 40px;
+	font-size: 12px;
+}
+
+.size8{
+	width: 35px;
+	height: 35px;
+	font-size: 12px;
+}
+
 table{
 	border: 1px solid black;
 	background: grey;
+	table-layout: fixed;
 }
 
 a{
@@ -135,16 +178,106 @@ a{
 	padding-right: 3px;
 }
 
+#win{
+	text-align: center;
+	padding-top: 5px;
+}
+
+#chooseLevel{
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.arrow{
+	border: none;
+	padding: 0;
+}
+
+#sizeField{
+	padding: 0 20px;
+}
+
+.podlozka{
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 100;
+	background: #000;
+	opacity: 0.4;
+	width: 100%;
+	height: 100%;
+}
+
+.modalWindow{
+	background: white;
+	width: 300px;
+	border: 2px solid black;
+	border-radius: 5px;
+	height: 100px;
+	font-size: 18px;
+	text-align: center;
+
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	right: 50%;
+	transform:translate(-50%, -50%);
+	z-index: 1000;
+}
+
+.newGameTitle{
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+.newGameButton{
+	border: 1px solid #e8d6ff;
+	background: #e8d6ff;
+	margin-top: 20px;
+}
+
 @media (max-device-width : 425px) {
 
 	html{
 		font-size: 50px;
 	}
 
-	td{
+	.size3{
+		width: 240px;
+		height: 240px;
+		font-size: 66px;
+	}
+	
+	.size4{
 		width: 180px;
 		height: 180px;
 	}
+	
+	.size5{
+		width: 144px;
+		height: 144px;
+		font-size: 40px;
+	}
+	
+	.size6{
+		width: 120px;
+		height: 120px;
+		font-size: 33px;
+	}
+	
+	.size7{
+		width: 103px;
+		height: 103px;
+		font-size: 28px;
+	}
+	
+	.size8{
+		width: 90px;
+		height: 90px;
+		font-size: 25px;
+	}
+
 
 	#score{
 		margin-top: 25%;
@@ -165,5 +298,26 @@ a{
 
 	.start_button:hover{
 		font-size: 50px;
+	}
+
+	.modalWindow {
+		width: 720px;
+		height: 360px;
+		font-size: 50px;
+	}
+
+	.newGameTitle{
+		padding-top: 50px;
+		padding-bottom: 80px;
+	}
+
+	.newGameButton{
+		font-size: 48px;
+	}
+
+	#yesGame{
+		padding-right: 10px;
+		padding-left: 10px;
+		margin-right: 100px;
 	}
 }
