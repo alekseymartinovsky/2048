@@ -37,35 +37,41 @@ td{
 	width: 93.333px;
 	height: 93.333px;
 	font-size: 26px;
+	transition: 0.1s;
 }
 
 .size4{
 	width: 70px;
 	height: 70px;
+	transition: 0.1s;
 }
 
 .size5{
 	width: 56px;
 	height: 56px;
 	font-size: 16px;
+	transition: 0.2s;
 }
 
 .size6{
 	width: 46.666px;
 	height: 46.666px;
 	font-size: 13px;
+	transition: 0.2s;
 }
 
 .size7{
 	width: 40px;
 	height: 40px;
 	font-size: 12px;
+	transition: 0.2s;
 }
 
 .size8{
 	width: 35px;
 	height: 35px;
 	font-size: 12px;
+	transition: 0.2s;
 }
 
 table{
